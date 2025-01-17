@@ -83,9 +83,7 @@ const App = () => {
   async function registerCall(agentId: string): Promise<RegisterCallResponse> {
     try {
       // Update the URL to match the new backend endpoint you created
-      const response = await fetch("https://efac-34-219-40-223.ngrok-free.app/create-web-call", {
-        // const response = await fetch("https://192.168.104.251:8080/create-web-call", {
-        // const response = await fetch("https://34.219.40.223:3000/create-web-call", {
+      const response = await fetch("https://e3f2-34-219-40-223.ngrok-free.app/create-web-call", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
