@@ -1,107 +1,195 @@
 .App {
-  text-align: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
-.container {
+.golf-container {
+  width: 100%;
+  max-width: 600px;
+  perspective: 1000px;
+}
+
+.golf-interface {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
   padding: 2rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  width: 90%;
-  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 
-.chat-interface {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+.golf-interface.active-session {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
 }
 
-h1 {
-  color: #ffffff;
-  font-size: 2rem;
-  margin: 0;
-  font-weight: 600;
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.voice-indicator {
-  height: 100px;
+.header h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
 }
 
-.wave-container {
+.golf-icon {
+  animation: bounce 2s infinite;
+}
+
+.subtitle {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.animation-container {
+  position: relative;
+  height: 120px;
+  margin: 2rem 0;
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 5px;
-  height: 60px;
+}
+
+.golf-ball {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: float 3s ease-in-out infinite;
+}
+
+.wave-animation {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wave {
-  width: 4px;
-  height: 20px;
-  background: #4CAF50;
-  border-radius: 10px;
-  transition: height 0.2s ease;
+  position: absolute;
+  border: 2px solid #4CAF50;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: ripple 2s infinite;
 }
 
-.animating .wave {
-  animation: wave 1s ease infinite;
-}
+.wave:nth-child(2) { animation-delay: 0.3s; }
+.wave:nth-child(3) { animation-delay: 0.6s; }
 
-.wave:nth-child(2) { animation-delay: 0.1s; }
-.wave:nth-child(3) { animation-delay: 0.2s; }
-.wave:nth-child(4) { animation-delay: 0.3s; }
-.wave:nth-child(5) { animation-delay: 0.4s; }
-
-@keyframes wave {
-  0%, 100% { height: 20px; }
-  50% { height: 60px; }
-}
-
-.call-button {
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
+.golf-button {
+  width: 100%;
+  padding: 1rem;
   border: none;
-  border-radius: 50px;
-  background: #4CAF50;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
   color: white;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.golf-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+}
+
+.golf-button.active {
+  background: linear-gradient(135deg, #ff4b4b, #ff3333);
+}
+
+.button-content {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  min-width: 200px;
 }
 
-.call-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+.status-container {
+  margin-top: 1.5rem;
 }
 
-.call-button.active {
-  background: #f44336;
+.status-badge {
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
-.button-text {
-  font-weight: 500;
+.status-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #4CAF50;
 }
 
-.button-icon {
-  font-size: 1.4rem;
+.audio-visualizer {
+  display: flex;
+  gap: 3px;
 }
 
-.status-text {
-  color: #ffffff;
-  opacity: 0.8;
-  margin: 0;
-  font-size: 1rem;
+.bar {
+  width: 3px;
+  height: 15px;
+  background: #4CAF50;
+  border-radius: 3px;
+  animation: soundBars 1s infinite;
+}
+
+.bar:nth-child(2) { animation-delay: 0.2s; }
+.bar:nth-child(3) { animation-delay: 0.4s; }
+.bar:nth-child(4) { animation-delay: 0.6s; }
+
+.status-inactive {
+  color: #7f8c8d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sparkle {
+  animation: twinkle 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes soundBars {
+  0% { height: 5px; }
+  50% { height: 15px; }
+  100% { height: 5px; }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }

@@ -110,28 +110,61 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="container">
-        <div className="chat-interface">
-          <h1>AI Voice Assistant</h1>
-          <div className={`voice-indicator ${isAnimating ? 'animating' : ''}`}>
-            <div className="wave-container">
-              {[...Array(5)].map((_, i) => (
-                <div key={i} className="wave"></div>
-              ))}
+      <div className="golf-container">
+        <div className={`golf-interface ${isCalling ? 'active-session' : ''}`}>
+          <div className="header">
+            <h1>
+              <span className="golf-icon">⛳</span>
+              Golf Shot Assistant
+            </h1>
+            <p className="subtitle">Your AI-powered golf companion</p>
+          </div>
+
+          <div className="main-content">
+            <div className={`animation-container ${isAnimating ? 'talking' : ''}`}>
+              <div className="golf-ball"></div>
+              <div className="wave-animation">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="wave"></div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              className={`golf-button ${isCalling ? 'active' : ''}`}
+              onClick={toggleConversation}
+            >
+              <div className="button-content">
+                <span className="button-icon">
+                  {isCalling ? '🎯' : '🏌️'}
+                </span>
+                <span className="button-text">
+                  {isCalling ? 'End Session' : 'Start Golf Assistant'}
+                </span>
+              </div>
+            </button>
+
+            <div className="status-container">
+              <div className={`status-badge ${isCalling ? 'active' : ''}`}>
+                {isCalling ? (
+                  <div className="status-active">
+                    <div className="audio-visualizer">
+                      {[...Array(4)].map((_, i) => (
+                        <div key={i} className="bar"></div>
+                      ))}
+                    </div>
+                    <span>Assistant is listening...</span>
+                  </div>
+                ) : (
+                  <div className="status-inactive">
+                    <span className="sparkle">✨</span>
+                    Ready to help with your golf game
+                    <span className="sparkle">✨</span>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <button
-            className={`call-button ${isCalling ? 'active' : ''}`}
-            onClick={toggleConversation}
-          >
-            <span className="button-text">{isCalling ? 'End Call' : 'Start Call'}</span>
-            <span className="button-icon">
-              {isCalling ? '📞' : '🎙️'}
-            </span>
-          </button>
-          <p className="status-text">
-            {isCalling ? 'Call in progress...' : 'Click to start a conversation'}
-          </p>
         </div>
       </div>
     </div>
